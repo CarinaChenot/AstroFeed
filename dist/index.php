@@ -10,7 +10,7 @@
 // if (file_exists($path)) {
 //
 //     $forecast = file_get_contents($path);
-// 
+//
 // // From API
 // } else {
 //
@@ -37,14 +37,15 @@
 </head>
 
 <body>
-
-    <section>
-        <form class="" action="#" method="post">
-
-        </form>
-    </section>
-
-    <script src="assets/js/main.min.js"></script>
+    <div id="webgl"></div>
+	<a href="http://thematicmapping.org/" class="tm">
+		<img src="http://earthatlas.info/img/thematicmapping.png">
+	</a>
+	<!-- <script src="js/three.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r61/three.js"></script>
+	<script src="assets/js/Detector.js"></script>
+	<script src="assets/js/TrackballControls.js"></script>
+	<script src="assets/js/earth.js"></script>
 </body>
 
 </html>

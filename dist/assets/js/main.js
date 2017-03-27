@@ -1,3 +1,1 @@
-'use strict';
-
-var tata = 'ver';
+"use strict";
