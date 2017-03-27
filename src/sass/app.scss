@@ -1,0 +1,16 @@
+/*
+Application name:
+Description:
+Version: 1.0
+*/
+
+@charset 'UTF-8';
+
+// Base
+@import 'base/reset';
+@import 'base/variables';
+@import 'base/global';
+
+// Components
+@import 'components/header';
+@import 'components/footer';
