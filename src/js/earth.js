@@ -18,7 +18,8 @@
 
 	var scene = new THREE.Scene();
 
-	var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
+  // 60 --> change to modify earth size
+	var camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 1000);
 	camera.position.z = 1.5;
 
 	var renderer = new THREE.WebGLRenderer();
@@ -32,11 +33,11 @@
 
     var sphere = createSphere(radius, segments);
 	sphere.rotation.y = rotation;
-	scene.add(sphere)
+	scene.add(sphere);
 
     var clouds = createClouds(radius, segments);
 	clouds.rotation.y = rotation;
-	scene.add(clouds)
+//	scene.add(clouds);
 
 	var stars = createStars(90, 64);
 	scene.add(stars);
@@ -50,7 +51,7 @@
 	function render() {
 		controls.update();
 		sphere.rotation.y += 0.0005;
-		clouds.rotation.y += 0.0005;
+//		clouds.rotation.y += 0.0005;
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 	}
@@ -59,11 +60,11 @@
 		return new THREE.Mesh(
 			new THREE.SphereGeometry(radius, segments, segments),
 			new THREE.MeshPhongMaterial({
-				map:         THREE.ImageUtils.loadTexture('assets/img/2_no_clouds_4k.jpg'),
-				bumpMap:     THREE.ImageUtils.loadTexture('assets/img/elev_bump_4k.jpg'),
-				bumpScale:   0.005,
-				specularMap: THREE.ImageUtils.loadTexture('assets/img/water_4k.png'),
-				specular:    new THREE.Color('grey')
+				map:         THREE.ImageUtils.loadTexture('assets/img/test.jpg')
+//				bumpMap:     THREE.ImageUtils.loadTexture('assets/img/elev_bump_4k.jpg'),
+//				bumpScale:   0.005,
+//				specularMap: THREE.ImageUtils.loadTexture('assets/img/water_4k.png'),
+//				specular:    new THREE.Color('grey')
 			})
 		);
 	}
