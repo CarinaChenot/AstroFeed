@@ -1,32 +1,8 @@
-<?php
-
-// Faire le cache
-// // Setup
-// $city = !empty($_GET['city']) ? $_GET['city'] : 'Paris';
-// $url = 'http://api.openweathermap.org/data/2.5/forecast?q=' . $city . '&units=metric&APPID=9e8150c9d6fbf87d678d2cf7f7a2c00a';
-// $path = './cache/'.md5($url.date('Y-m-d H'));
-//
-// // From cache
-// if (file_exists($path)) {
-//
-//     $forecast = file_get_contents($path);
-//
-// // From API
-// } else {
-//
-//     // Get content
-//     $forecast = file_get_contents($url);
-//
-//     // Save in cache
-//     file_put_contents($path, $forecast);
-// }
-//
-// $forecast = json_decode($forecast);
-
- ?>
-
  <?php
+
    include 'includes/twitter_requests.php';
+   include 'includes/cache.php';
+
  ?>
 
 <!DOCTYPE html>
@@ -50,12 +26,21 @@
     <section id="home">
         <div id="webgl"></div>
 
-        <div class="markers">
+        <div class="astro-list">
+            <h1>Astronauts</h1>
+            <?php foreach ($astronauts as $_astronaut):?>
+                 <a class="astro" href="?astronaut=<?= $_astronaut ?>" style="background-image: url('assets/img/<?= 'doge.jpeg' ?>')"></a>
+            <?php endforeach; ?>
 
         </div>
         <div class="center">
             <div class="popup">
 
+            </div>
+            <div class="timeline">
+                <div class="ligne">
+
+                </div>
             </div>
         </div>
     </section>

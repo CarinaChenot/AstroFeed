@@ -1,21 +1,3 @@
 body {
     font-family: 'Open Sans', 'Arial', sans-serif;
 }
-
-.markers {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-}
-
-.marker {
-    position: absolute;
-    background-color: red;
-    z-index: 100;
-    height: 30px;
-    width: 30px;
-    border-radius: 100%;
-    cursor: pointer;
-}

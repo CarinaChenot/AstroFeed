@@ -3,7 +3,7 @@
 let myVar;
 
 function timer() {
-    myVar = setTimeout(hidePage, 10000);
+    myVar = setTimeout(hidePage, 2500);
 }
 
 function hidePage() {
