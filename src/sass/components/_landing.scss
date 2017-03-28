@@ -1,0 +1,94 @@
+#home {
+    // display: none;
+}
+
+#landing {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-image: url('../img/stars-bg.png');
+    animation-name: fading;
+    animation-duration: 5s;
+    opacity: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 4s;
+}
+
+.landing-text {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    text-align: center;
+    color: transparent;
+    font-size: 100px;
+    animation-name: animatetext;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    font-family: $primary-font;
+}
+
+.landing-text div {
+    margin-top: 15px;
+    font-family: $secondary-font;
+    font-size: 20px;
+}
+
+@keyframes fading {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+@keyframes animatetext {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+        color: transparent;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        color: white;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+        color: transparent;
+    }
+}
+//
+// .loader {
+//     display: none;
+//     position: absolute;
+//     left: 50%;
+//     top: 50%;
+//     z-index: 1;
+//     width: 150px;
+//     height: 150px;
+//     margin: -75px 0 0 -75px;
+//     border: 16px solid #f3f3f3;
+//     border-radius: 50%;
+//     border-top: 16px solid #3498db;
+//     width: 120px;
+//     height: 120px;
+//     -webkit-animation: spin 2s linear infinite;
+//     animation: spin 2s linear infinite;
+// }
+// @keyframes spin {
+//     0% {
+//         transform: rotate(0deg);
+//     }
+//
+//     100% {
+//         transform: rotate(360deg);
+//     }
+// }

@@ -8,9 +8,12 @@ Version: 1.0
 
 // Base
 @import 'base/reset';
+@import 'base/fonts';
 @import 'base/variables';
 @import 'base/global';
 
 // Components
 @import 'components/header';
+@import 'components/landing';
+@import 'components/popups';
 @import 'components/footer';
