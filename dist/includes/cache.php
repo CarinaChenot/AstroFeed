@@ -18,6 +18,6 @@ foreach ($astronauts as $_astronaut) {
         $tweets[$_astronaut] = file_get_contents('http://google.com'); // À remplacer par la requête API
 
         // Save in cache
-        file_put_contents($path, $tweets);
+        file_put_contents($path, $tweets[$_astronaut]);
     }
 }
