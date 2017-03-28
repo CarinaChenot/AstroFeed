@@ -26,7 +26,7 @@ if (!empty($_GET['astronaut']))
   else
     $count = 20;
 
-  $getfield = '?screen_name='.$astronaut.'&count=$count';
+  $getfield = '?screen_name='.$astronaut.'&count='.$count;
 
   $twitter = new TwitterAPIExchange($settings);
   $twitter->setGetfield($getfield)
@@ -40,10 +40,19 @@ if (!empty($_GET['astronaut']))
   foreach($tweets as $_tweets)
   {
     // Get time and date of the tweet
-    echo "Time and Date of Tweet: ".$_tweets['created_at']."<br />";
+    echo "Time and Date of Tweet: ".date('d F - H:i', strtotime($_tweets['created_at']))."<br />";
     
     // Get the tweet text
-    echo "Tweet: ".$_tweets['text']."<br />";
+    if (isset($_tweets['entities']['urls']['0']['url']))
+    {
+      $no_link_tweet = str_replace($_tweets['entities']['urls']['0']['url'], '', $_tweets['text']).'<br />';
+      echo $no_link_tweet;
+    }
+    else
+    {
+      echo $_tweets['text'].'<br />';
+    }
+    
     
     // Check if media in the tweet and set size if true (thumb, small, medium, large or w and h)
     if(isset($_tweets['entities']['media']['0']['media_url']))
