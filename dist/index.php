@@ -3,6 +3,9 @@
    include 'includes/twitter_requests.php';
    include 'includes/cache.php';
 
+   $astronauts = file_get_contents('astronauts.json');
+   $astronauts = json_decode($astronauts);
+
  ?>
 
 <!DOCTYPE html>
@@ -13,6 +16,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>Title</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i" rel="stylesheet">
     <link href="assets/css/app.min.css" rel="stylesheet">
 </head>
 
@@ -28,8 +32,12 @@
 
         <div class="astro-list">
             <h1>Astronauts</h1>
-            <?php foreach ($astronauts as $_astronaut):?>
-                 <a class="astro" href="?astronaut=<?= $_astronaut ?>" style="background-image: url('assets/img/<?= 'doge.jpeg' ?>')"></a>
+            <?php foreach ($astronauts as $_astronaut): ?>
+                 <a class="astro" href="?astronaut=<?= $_astronaut->twitter ?>" style="background-image: url('assets/img/<?= $_astronaut->picture_small ?>')">
+                     <span class="astro-caption">
+                         <?= $_astronaut->name ?>
+                     </span>
+                 </a>
             <?php endforeach; ?>
 
         </div>
@@ -39,6 +47,9 @@
             </div>
             <div class="timeline">
                 <div class="ligne">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
 
                 </div>
             </div>
