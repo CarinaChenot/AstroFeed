@@ -1,2 +1,4 @@
 node_modules/
 dist/cache/
+dist/assets/js/
+dist/assets/css/
