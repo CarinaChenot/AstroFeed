@@ -25,6 +25,10 @@
 
  ?>
 
+ <?php
+   include 'includes/twitter_requests.php';
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,16 +40,33 @@
     <link href="assets/css/app.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div id="webgl"></div>
-	<a href="http://thematicmapping.org/" class="tm">
-		<img src="http://earthatlas.info/img/thematicmapping.png">
-	</a>
+<body onload="timer()">
+    <section id="landing">
+        <div class="landing-text">
+            AstroFeed
+            <div>An interactive astronauts socials feed</div>
+        </div>
+    </section>
+    <section id="home">
+        <div id="webgl"></div>
+
+        <div class="markers">
+
+        </div>
+        <div class="center">
+            <div class="popup">
+
+            </div>
+        </div>
+    </section>
+
 	<!-- <script src="js/three.min.js"></script> -->
+    <script src="assets/js/main.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r61/three.js"></script>
 	<script src="assets/js/Detector.js"></script>
 	<script src="assets/js/TrackballControls.js"></script>
 	<script src="assets/js/earth.js"></script>
+	<script src="assets/js/markers.js"></script>
 </body>
 
 </html>
