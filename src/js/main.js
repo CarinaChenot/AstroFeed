@@ -13,18 +13,19 @@ function hidePage() {
 // Scroll timeline
 let wheel = document.querySelector('.wheel')
 let timeline = document.querySelector('.timeline')
+let slow = 3 // set 1 to default
 
-timeline.scrollTop = 360
+timeline.scrollTop = 360*3
 
 timeline.addEventListener('scroll', () => {
 
-   	wheel.style.transform = 'translateX(-50%) rotate(' + (timeline.scrollTop) + 'deg)'
+   	wheel.style.transform = 'rotate(' + (timeline.scrollTop/slow) + 'deg)'
 
-   	if(timeline.scrollTop >= 720){
-   		timeline.scrollTop = 360
+   	if(timeline.scrollTop >= 720*slow){
+   		timeline.scrollTop = 360*slow
    	}
    	else if(timeline.scrollTop == 0){
-   		timeline.scrollTop = 360
+   		timeline.scrollTop = 360*slow
    	}
 }, false)
 
@@ -32,7 +33,8 @@ timeline.addEventListener('scroll', () => {
 // Generate timeline dots
 
 let dots = document.querySelectorAll('.dot')
+let ligne = document.querySelector('.ligne').offsetWidth
 
-for (var i = 0; i < dots.length; i++) {
-    // dots[i].style.transform
+for (let i = 0; i < dots.length; i++) {
+    dots[i].style.transform = 'rotate(-' + i*10 + 'deg) translateX(-' + ligne/2 + 'px)'
 }

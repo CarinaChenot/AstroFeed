@@ -3,8 +3,8 @@
  $astronauts = file_get_contents('astronauts.json');
  $astronauts = json_decode($astronauts);
 
-   // include 'includes/twitter_requests.php';
-   include 'includes/cache.php';
+  //  include 'includes/twitter_requests.php';
+  //  include 'includes/cache.php';
 
 
  ?>
@@ -45,12 +45,17 @@
         <!-- Timeline wheel -->
         <div class="timeline">
             <div class="overflow">
-                <div class="wheel">
-                    <div class="ligne">
-                        <div class="dot one"></div>
-                        <div class="dot two"></div>
-                        <div class="dot three"></div>
-                    </div>
+                <div class="mask">
+                  <div class="wheel">
+                      <div class="ligne">
+                        <div class="dots-origin">
+                          <div class="dot one"></div>
+                          <div class="dot two"></div>
+                          <div class="dot three"></div>
+                        </div>
+
+                      </div>
+                  </div>
                 </div>
             </div>
         </div>
