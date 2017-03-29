@@ -1,29 +1,38 @@
 // Landing
 
-let myVar;
+let myVar
 
 function timer() {
-    myVar = setTimeout(hidePage, 2500);
+    myVar = setTimeout(hidePage, 2500)
 }
 
 function hidePage() {
-  document.getElementById('landing').style.display = 'none';
+  document.getElementById('landing').style.display = 'none'
 }
 
 // Scroll timeline
-let wheel = document.querySelector('.wheel');
-let timeline = document.querySelector('.timeline');
+let wheel = document.querySelector('.wheel')
+let timeline = document.querySelector('.timeline')
 
-timeline.scrollTop = 360;
+timeline.scrollTop = 360
 
 timeline.addEventListener('scroll', () => {
 
-   	wheel.style.transform = 'translateX(-50%) rotate(' + (timeline.scrollTop) + 'deg)';
+   	wheel.style.transform = 'translateX(-50%) rotate(' + (timeline.scrollTop) + 'deg)'
 
    	if(timeline.scrollTop >= 720){
-   		timeline.scrollTop = 360;
+   		timeline.scrollTop = 360
    	}
    	else if(timeline.scrollTop == 0){
-   		timeline.scrollTop = 360;
+   		timeline.scrollTop = 360
    	}
-}, false);
+}, false)
+
+
+// Generate timeline dots
+
+let dots = document.querySelectorAll('.dot')
+
+for (var i = 0; i < dots.length; i++) {
+    // dots[i].style.transform
+}
