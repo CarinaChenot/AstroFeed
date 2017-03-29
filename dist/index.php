@@ -1,32 +1,11 @@
-<?php
-
-// Faire le cache
-// // Setup
-// $city = !empty($_GET['city']) ? $_GET['city'] : 'Paris';
-// $url = 'http://api.openweathermap.org/data/2.5/forecast?q=' . $city . '&units=metric&APPID=9e8150c9d6fbf87d678d2cf7f7a2c00a';
-// $path = './cache/'.md5($url.date('Y-m-d H'));
-//
-// // From cache
-// if (file_exists($path)) {
-//
-//     $forecast = file_get_contents($path);
-//
-// // From API
-// } else {
-//
-//     // Get content
-//     $forecast = file_get_contents($url);
-//
-//     // Save in cache
-//     file_put_contents($path, $forecast);
-// }
-//
-// $forecast = json_decode($forecast);
-
- ?>
-
  <?php
+
    include 'includes/twitter_requests.php';
+   include 'includes/cache.php';
+
+   $astronauts = file_get_contents('astronauts.json');
+   $astronauts = json_decode($astronauts);
+
  ?>
 
 <!DOCTYPE html>
@@ -37,6 +16,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>Title</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i" rel="stylesheet">
     <link href="assets/css/app.min.css" rel="stylesheet">
 </head>
 
@@ -50,12 +30,28 @@
     <section id="home">
         <div id="webgl"></div>
 
-        <div class="markers">
+        <div class="astro-list">
+            <h1>Astronauts</h1>
+            <?php foreach ($astronauts as $_astronaut): ?>
+                 <a class="astro" href="?astronaut=<?= $_astronaut->twitter ?>" style="background-image: url('assets/img/<?= $_astronaut->picture_small ?>')">
+                     <span class="astro-caption">
+                         <?= $_astronaut->name ?>
+                     </span>
+                 </a>
+            <?php endforeach; ?>
 
         </div>
         <div class="center">
             <div class="popup">
 
+            </div>
+            <div class="timeline">
+                <div class="ligne">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+
+                </div>
             </div>
         </div>
     </section>
