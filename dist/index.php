@@ -42,16 +42,15 @@
             <?php endforeach; ?>
 
         </div>
-        <div class="center">
-            <div class="popup">
-
-            </div>
-            <div class="timeline">
-                <div class="ligne">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-
+        <!-- Timeline wheel -->
+        <div class="timeline">
+            <div class="overflow">
+                <div class="wheel">
+                    <div class="ligne">
+                        <div class="dot one"></div>
+                        <div class="dot two"></div>
+                        <div class="dot three"></div>
+                    </div>
                 </div>
             </div>
         </div>
