@@ -64,7 +64,6 @@
 	<script src="assets/js/Detector.js"></script>
 	<script src="assets/js/TrackballControls.js"></script>
 	<script src="assets/js/earth.js"></script>
-	<script src="assets/js/markers.js"></script>
 </body>
 
 </html>
