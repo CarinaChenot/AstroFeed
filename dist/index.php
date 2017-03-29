@@ -57,7 +57,8 @@
     </section>
 
 	<!-- <script src="js/three.min.js"></script> -->
-    <script src="assets/js/main.js"></script>
+  <script src='assets/js/threex.windowresize.js'></script>
+  <script src="assets/js/main.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r61/three.js"></script>
 	<script src="assets/js/Detector.js"></script>
 	<script src="assets/js/TrackballControls.js"></script>
