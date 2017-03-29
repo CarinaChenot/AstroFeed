@@ -4,7 +4,7 @@
  $astronauts = json_decode($astronauts);
 
   //  include 'includes/twitter_requests.php';
-  //  include 'includes/cache.php';
+   include 'includes/cache.php';
 
 
  ?>
@@ -52,8 +52,10 @@
                           <div class="dot one"></div>
                           <div class="dot two"></div>
                           <div class="dot three"></div>
+                          <div class="stroke"></div>
+                          <div class="stroke"></div>
+                          <div class="stroke"></div>
                         </div>
-
                       </div>
                   </div>
                 </div>

@@ -33,8 +33,12 @@ timeline.addEventListener('scroll', () => {
 // Generate timeline dots
 
 let dots = document.querySelectorAll('.dot')
+let strokes = document.querySelectorAll('.stroke')
 let ligne = document.querySelector('.ligne').offsetWidth
 
 for (let i = 0; i < dots.length; i++) {
-    dots[i].style.transform = 'rotate(-' + i*10 + 'deg) translateX(-' + ligne/2 + 'px)'
+    dots[i].style.transform = 'rotate(' + i*10 + 'deg) translateX(' + ligne/2 + 'px)'
+}
+for (let i = 0; i < strokes.length; i++) {
+    strokes[i].style.transform = 'rotate(' + i*10 + 'deg) translateX(' + ligne/2 + 'px)'
 }
