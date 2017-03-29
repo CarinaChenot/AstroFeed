@@ -1,5 +1,5 @@
 <?php
-  
+
 require_once('twitter_api_exchange.php');
 
 /** Set access tokens **/
@@ -18,9 +18,9 @@ $requestMethod = 'GET';
 
 if (!empty($_GET['astronaut']))
 {
-  
+
   /** Get astronaut twitter screen_name and count **/
-  $astronaut = $_GET['astronaut'];  
+  $astronaut = $_GET['astronaut'];
   if (isset($_GET['count']))
     $count = $_GET['count'];
   else
@@ -37,27 +37,28 @@ if (!empty($_GET['astronaut']))
                         ->buildOauth($url, $requestMethod)
                         ->performRequest(),$assoc = TRUE);
 
-  foreach($tweets as $_tweets)
-  {
-    // Get time and date of the tweet
-    echo "Time and Date of Tweet: ".date('d F - H:i', strtotime($_tweets['created_at']))."<br />";
-    
-    // Get the tweet text
-    if (isset($_tweets['entities']['urls']['0']['url']))
+    foreach($tweets['Thom_astro'] as $_tweet)
     {
-      $no_link_tweet = str_replace($_tweets['entities']['urls']['0']['url'], '', $_tweets['text']).'<br />';
-      echo $no_link_tweet;
+
+      // Get time and date of the tweet
+      echo "Time and Date of Tweet: ".date('d F - H:i', strtotime($_tweet->created_at))."<br />";
+
+      // Get the tweet text
+      if (isset($_tweet->entities->urls['0']->url))
+      {
+        $no_link_tweet = str_replace($_tweet->entities->urls['0']->url, '', $_tweet->text).'<br />';
+        echo $no_link_tweet;
+      }
+      else
+      {
+        echo $_tweet->text.'<br />';
+      }
+
+
+      // Check if media in the tweet and set size if true (thumb, small, medium, large or w and h)
+      if(isset($_tweet->entities->media['0']->media_url))
+        echo "Tweet image: <img src=".$_tweet->entities->media['0']->media_url.":small /><br />";
+
+      echo '<br />';
     }
-    else
-    {
-      echo $_tweets['text'].'<br />';
-    }
-    
-    
-    // Check if media in the tweet and set size if true (thumb, small, medium, large or w and h)
-    if(isset($_tweets['entities']['media']['0']['media_url']))
-      echo "Tweet image: <img src=".$_tweets['entities']['media']['0']['media_url'].":small /><br />";
-    
-    echo '<br />';
-  }
 }

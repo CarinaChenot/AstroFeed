@@ -1,10 +1,11 @@
  <?php
 
-   include 'includes/twitter_requests.php';
+ $astronauts = file_get_contents('astronauts.json');
+ $astronauts = json_decode($astronauts);
+
+   // include 'includes/twitter_requests.php';
    include 'includes/cache.php';
 
-   $astronauts = file_get_contents('astronauts.json');
-   $astronauts = json_decode($astronauts);
 
  ?>
 
