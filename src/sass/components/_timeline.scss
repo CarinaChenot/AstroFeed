@@ -1,33 +1,51 @@
 .timeline {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    overflow: scroll;
+
+    .overflow {
+        height: 1000px;
+    }
+
+    .wheel {
+        width: 500px;
+        height: 500px;
+        position: fixed;
+        border-radius: 100%;
+        z-index: -1;
+    }
+
     .ligne {
         position: absolute;
         top: 50%;
         left: 50%;
-        height: 600px;
-        width: 600px;
-        transform: translate(-50%, -50%);
+        height: 450px;
+        width: 450px;
+        // transform: translate(-50%, -50%);
         border-radius: 100%;
         background-color: none;
         box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         border: solid 1px whitesmoke;
+    }
 
-        .dot {
-            background-color: white;
-            position: absolute;
-            height: 20px;
-            width: 20px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-309%, -50%);
-            border-radius: 100%;
-            // transform-origin: 20% 40%;
-            // transform: rotate3d(90deg);
-        }
-        .dot.selected {
-            position: relative;
-            transform: translate(-50%, -50%);
-            left: 50%;
-            top: 500px;
-        }
+    .dot {
+        background-color: #ffffff;
+        border-radius: 500px;
+        height: 18px;
+        width: 18px;
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .dot.selected {
+        position: relative;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 500px;
     }
 }
