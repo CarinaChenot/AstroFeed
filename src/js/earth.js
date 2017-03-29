@@ -1,8 +1,6 @@
-'use strict';
-
 // Created by Bjorn Sandvik - thematicmapping.org
 (function () {
-
+  
 	var webglEl = document.getElementById('webgl');
 
 	if (!Detector.webgl) {
@@ -95,7 +93,6 @@
   //  Add background to the canvas
 	var stars = createStars(90, 64);
 	scene.add(stars);
-
   
 	var controls = new THREE.TrackballControls(camera);
 
@@ -164,5 +161,5 @@
  
     return [x,y,z];
   }
-  
+  var winResize	= new THREEx.WindowResize(renderer, camera);
 })();

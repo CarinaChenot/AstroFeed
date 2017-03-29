@@ -1,7 +1,6 @@
 'use strict';
 
 // Created by Bjorn Sandvik - thematicmapping.org
-
 (function () {
 
 	var webglEl = document.getElementById('webgl');
@@ -164,4 +163,5 @@
 
 		return [x, y, z];
 	}
+	var winResize = new THREEx.WindowResize(renderer, camera);
 })();
