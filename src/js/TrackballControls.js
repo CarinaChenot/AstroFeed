@@ -516,8 +516,6 @@ THREE.TrackballControls = function ( object, domElement ) {
 
 	}
 
-	this.domElement.addEventListener( 'contextmenu', function ( event ) { event.preventDefault(); }, false );
-
 	this.domElement.addEventListener( 'mousedown', mousedown, false );
 
 	this.domElement.addEventListener( 'mousewheel', mousewheel, false );
