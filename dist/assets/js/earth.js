@@ -49,8 +49,8 @@
 
   scene.add(new THREE.AmbientLight(0xffffff));
 
-  var light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(5, 3, 5);
+  var light = new THREE.DirectionalLight(0xffffff, 0.8);
+  light.position.set(3, 5, 4);
   scene.add(light);
 
   //  Create earth sphere
@@ -75,10 +75,10 @@
 
   var nasa = createMarkers(0xee293d);
   var nasa_coords = latLongToVector3(29.552793, -95.093072, radius);
-  nasa.position.x = nasa_coords[0] + 0.12;
+  nasa.position.x = nasa_coords[0] + 0.03;
   nasa.position.y = nasa_coords[1] - 0.22;
-  nasa.position.z = nasa_coords[2] + 0.065;
-  sphere.add(nasa);
+  nasa.position.z = nasa_coords[2] + 0.067;
+  //  sphere.add(nasa); 
 
   var rsa = createMarkers(0xd8e3ef);
   var rsa_coords = latLongToVector3(55.87985, 38.105581, radius);
@@ -93,6 +93,25 @@
   var stars = createStars(90, 64);
   scene.add(stars);
 
+  //  Add Iss to the scene
+  var iss = createIss();
+  //  iss.position.x = 2;
+  iss.scale.set(0.008, 0.008, 1);
+  iss.position.x = 0.7;
+  scene.add(iss);
+
+  //  sphere = new THREE.Object3D();
+  //	scene.add( parent );
+
+  var pivot1 = new THREE.Object3D();
+  pivot1.rotation.z = 0;
+  sphere.add(pivot1);
+  pivot1.add(iss);
+
+  //  
+  //  var lon = 0, lat = 0;
+  //  var phi = 0, theta = 0;
+
   var controls = new THREE.TrackballControls(camera);
   webglEl.appendChild(renderer.domElement);
   render();
@@ -102,7 +121,9 @@
 
   function createSphere(radius, segments, img) {
     return new THREE.Mesh(new THREE.SphereGeometry(radius, segments, segments), new THREE.MeshPhongMaterial({
-      map: THREE.ImageUtils.loadTexture(img)
+      map: THREE.ImageUtils.loadTexture(img),
+      shininess: 35
+      // wireframe:true,
     }));
   }
 
@@ -127,9 +148,17 @@
   // Create background
   function createStars(radius, segments) {
     return new THREE.Mesh(new THREE.SphereGeometry(radius, segments, segments), new THREE.MeshBasicMaterial({
-      // map: THREE.ImageUtils.loadTexture('assets/img/background.jpg'), 
-      color: 0x000000,
+      map: THREE.ImageUtils.loadTexture('assets/img/stars.png'),
+      //      color:(0x050505),
       side: THREE.BackSide
+    }));
+  }
+
+  // Create Iss
+  function createIss() {
+    return new THREE.Mesh(new THREE.RingGeometry(0.5, 5, 8), new THREE.MeshBasicMaterial({
+      color: 0xffff00,
+      side: THREE.DoubleSide
     }));
   }
 
@@ -154,7 +183,13 @@
 
     if (sphere.rotation.y > 6.28) sphere.rotation.y = 0;
 
-    sphere.rotation.y += 0.0005;
+    // Auto rotation - slow
+    //		  sphere.rotation.y += 0.0005;
+    //      parent.rotation.y += 0.0005;
+
+    // 
+    iss.rotation.x += 0.01;
+    iss.rotation.y += 0.01;
 
     requestAnimationFrame(render);
     renderer.render(scene, camera);
