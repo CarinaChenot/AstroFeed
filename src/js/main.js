@@ -7,26 +7,39 @@ function timer() {
 }
 
 function hidePage() {
-  document.getElementById('landing').style.display = 'none'
+    document.getElementById('landing').style.display = 'none'
 }
+
+// Tweets animation
+function displayTweets(astro){
+    let container = document.querySelectorAll('.tweets-display')
+
+    for (let i = 0; i < container.length; i++) {
+        container[i].classList.remove('active')
+    }
+
+    let selected = document.querySelector('.tweets-display.' + astro)
+    selected.classList.add('active')
+
+}
+
 
 // Scroll timeline
 let wheel = document.querySelector('.wheel')
 let timeline = document.querySelector('.timeline')
 let slow = 3 // set 1 to default
 
-timeline.scrollTop = 360*3
+timeline.scrollTop = 360 * 3
 
 timeline.addEventListener('scroll', () => {
 
-   	wheel.style.transform = 'rotate(' + (timeline.scrollTop/slow) + 'deg)'
+    wheel.style.transform = 'rotate(' + (timeline.scrollTop / slow) + 'deg)'
 
-   	if(timeline.scrollTop >= 720*slow){
-   		timeline.scrollTop = 360*slow
-   	}
-   	else if(timeline.scrollTop == 0){
-   		timeline.scrollTop = 360*slow
-   	}
+    if (timeline.scrollTop >= 720 * slow) {
+        timeline.scrollTop = 360 * slow
+    } else if (timeline.scrollTop == 0) {
+        timeline.scrollTop = 360 * slow
+    }
 }, false)
 
 
@@ -37,8 +50,8 @@ let strokes = document.querySelectorAll('.stroke')
 let ligne = document.querySelector('.ligne').offsetWidth
 
 for (let i = 0; i < dots.length; i++) {
-    dots[i].style.transform = 'rotate(' + i*10 + 'deg) translateX(' + ligne/2 + 'px)'
+    dots[i].style.transform = 'rotate(' + i * 10 + 'deg) translateX(' + ligne / 2 + 'px)'
 }
 for (let i = 0; i < strokes.length; i++) {
-    strokes[i].style.transform = 'rotate(' + i*10 + 'deg) translateX(' + ligne/2 + 'px)'
+    strokes[i].style.transform = 'rotate(' + i * 10 + 'deg) translateX(' + ligne / 2 + 'px)'
 }
