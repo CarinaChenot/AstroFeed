@@ -13,9 +13,8 @@ Version: 1.0
 @import 'base/global';
 
 // Components
-@import 'components/header';
 @import 'components/landing';
-@import 'components/popups';
+@import 'components/home';
+@import 'components/astronauts';
+@import 'components/tweets';
 @import 'components/timeline';
-@import 'components/markers';
-@import 'components/footer';

@@ -1,11 +1,10 @@
  <?php
 
- $astronauts = file_get_contents('astronauts.json');
- $astronauts = json_decode($astronauts);
+    $astronauts = file_get_contents('astronauts.json');
+    $astronauts = json_decode($astronauts);
 
-  //  include 'includes/twitter_requests.php';
-   include 'includes/cache.php';
-
+    include 'includes/cache.php';
+    include 'includes/tweet_html.php';
 
  ?>
 
@@ -22,26 +21,46 @@
 </head>
 
 <body onload="timer()">
+
+    <!-- LANDING -->
     <section id="landing">
         <div class="landing-text">
             AstroFeed
             <div>An interactive astronauts socials feed</div>
         </div>
     </section>
-    <section id="home">
-        <div id="webgl"></div>
 
+    <!-- HOME -->
+    <div id="webgl"></div>
+    <section id="home">
+
+        <!-- Astro list -->
         <div class="astro-list">
             <h1>Astronauts</h1>
             <?php foreach ($astronauts as $_astronaut): ?>
-                 <a class="astro" href="?astronaut=<?= $_astronaut->twitter ?>" style="background-image: url('assets/img/<?= $_astronaut->picture_small ?>')">
-                     <span class="astro-caption">
-                         <?= $_astronaut->name ?>
-                     </span>
-                 </a>
+                <div class="astro">
+                    <a class="astro-picture" href="#" onclick="displayTweets('<?= $_astronaut->twitter ?>');" style="background-image: url('assets/img/<?= $_astronaut->picture_small ?>')"></a>
+                    <div class="astro-caption"><div><?= $_astronaut->name ?></div></div>
+                </div>
             <?php endforeach; ?>
-
         </div>
+
+        <!-- Tweets display -->
+        <div class="tweets-container">
+            <?php foreach ($tweets as $_astro): ?>
+            <div class="tweets-display <?= $_astro[0]->user->screen_name ?>">
+                <h2 class="name"><?= $_astro[0]->user->name ?></h2>
+                <?php foreach ($_astro as $_tweet): ?>
+                     <div class="tweet <?= $_tweet->user->screen_name ?>">
+                         <span class="date"><?= date('d F - H:i', strtotime($_tweet->created_at)) ?></span>
+                         <p class="text"><?php echo json_tweet_text_to_HTML($_tweet); ?></p>
+                     </div>
+                <?php endforeach; ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+
         <!-- Timeline wheel -->
         <div class="timeline">
             <div class="overflow">
@@ -61,15 +80,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="space-centers">
+              <a href="#">Nasa</a>
+              <a href="#">Esa</a>
+              <a href="#">Rsa</a>
+        </div>
+
     </section>
 
-	<!-- <script src="js/three.min.js"></script> -->
-  <script src='assets/js/threex.windowresize.js'></script>
-  <script src="assets/js/main.js"></script>
+    <!-- Scripts -->
+    <script src='assets/js/threex.windowresize.js'></script>
+    <script src="assets/js/main.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r61/three.js"></script>
 	<script src="assets/js/Detector.js"></script>
 	<script src="assets/js/TrackballControls.js"></script>
 	<script src="assets/js/earth.js"></script>
+
 </body>
 
 </html>
