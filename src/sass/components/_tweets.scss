@@ -1,0 +1,64 @@
+.tweets-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30vw;
+    height: 40vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: 14px;
+}
+
+.tweets-display {
+    position: absolute;
+    font-size: 14px;
+    line-height: 15px;
+
+    &.active {
+        .tweet {
+            transform: translateX(-30vw);
+        }
+
+        .name {
+            opacity: 1;
+        }
+    }
+
+    .name {
+        font-weight: bold;
+        font-size: 22px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .tweet {
+        position: relative;
+        margin-top: 10px;
+        right: -30vw;
+        transition: transform 0.3s ease-in-out;
+    }
+    $test: 0s;
+    @for $i from 1 through 20 {
+        .tweet:nth-of-type(#{$i}) {
+            transition-delay: $test;
+            $test: $test+0.1;
+        }
+    }
+
+    .date {
+        font-size: 10px;
+    }
+
+    .text {}
+
+    &::after {
+        content: '';
+        position: fixed;
+        top: 27vh;
+        right: 0;
+        width: 30vw;
+        height: 16vh;
+        margin: 0;
+        background-image: linear-gradient(to bottom, transparent, black);
+    }
+}
