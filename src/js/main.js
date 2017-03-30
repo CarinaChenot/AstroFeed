@@ -11,7 +11,7 @@ function hidePage() {
 }
 
 // Tweets animation
-function displayTweets(astro){
+function displayTweets(astro) {
     let container = document.querySelectorAll('.tweets-display')
 
     for (let i = 0; i < container.length; i++) {
@@ -20,38 +20,63 @@ function displayTweets(astro){
 
     let selected = document.querySelector('.tweets-display.' + astro)
     selected.classList.add('active')
-
 }
 
 
 // Scroll timeline
+
 let wheel = document.querySelector('.wheel')
 let timeline = document.querySelector('.timeline')
-let slow = 3 // set 1 to default
+let rotation = 0
 
-timeline.scrollTop = 360 * 3
+let scroll_pos = 0
+let ticking = false
 
-timeline.addEventListener('scroll', () => {
+timeline.addEventListener('scroll', (e) => {
+    e.preventDefault()
+    if (!ticking) {
 
-    wheel.style.transform = 'rotate(' + (timeline.scrollTop / slow) + 'deg)'
+        // //infinite scroll
+        // if (timeline.scrollTop >= 200) {
+        //     timeline.scrollTop = 0
+        // } else if (timeline.scrollTop == 0) {
+        //     timeline.scrollTop = 200
+        // }
 
-    if (timeline.scrollTop >= 720 * slow) {
-        timeline.scrollTop = 360 * slow
-    } else if (timeline.scrollTop == 0) {
-        timeline.scrollTop = 360 * slow
+        // console.log('last scroll pos', scroll_pos);
+        console.log('actual one', timeline.scrollTop);
+        if (scroll_pos > timeline.scrollTop) {
+            rotation += 45
+        } else {
+            rotation -= 45
+        }
+
+        wheel.style.transform = 'rotate(' + rotation + 'deg)'
+        ticking = true
+        setTimeout(() => {
+            scroll_pos = timeline.scrollTop
+            ticking = false
+        }, 1000)
     }
-}, false)
+})
 
 
 // Generate timeline dots
 
 let dots = document.querySelectorAll('.dot')
 let strokes = document.querySelectorAll('.stroke')
+let date = document.querySelectorAll('.date')
 let ligne = document.querySelector('.ligne').offsetWidth
+let datePos = 0;
+
 
 for (let i = 0; i < dots.length; i++) {
-    dots[i].style.transform = 'rotate(' + i * 10 + 'deg) translateX(' + ligne / 2 + 'px)'
+    dots[i].style.transform = 'rotate(' + (i+3) * 10 + 'deg) translateX(' + ligne / 2 + 'px)'
 }
 for (let i = 0; i < strokes.length; i++) {
-    strokes[i].style.transform = 'rotate(' + i * 10 + 'deg) translateX(' + ligne / 2 + 'px)'
+    strokes[i].style.transform = 'rotate(' + i * 45 + 'deg) translateX(' + ligne / 2 + 'px)'
+}
+for (let i = 0; i < date.length; i++) {
+    date[i].style.transform = 'rotate(' + datePos + 'deg) translateY(' + ligne / 2 + 'px) translateX(-50%)'
+    datePos -= 45;
 }

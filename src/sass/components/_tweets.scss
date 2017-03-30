@@ -49,7 +49,11 @@
         font-size: 10px;
     }
 
-    .text {}
+    .text {
+      a {
+        font-weight: bold;
+      }
+    }
 
     &::after {
         content: '';
