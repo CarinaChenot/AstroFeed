@@ -1,7 +1,27 @@
 'use strict';
 
-// Created by Bjorn Sandvik - thematicmapping.org
 (function () {
+  // Adapt earth rotation to display at the center the space center selected
+  var space_centers = document.querySelectorAll('.space-centers a');
+  // 0 - nasa ; 1 - esa ; 2 - rsa
+  var markers_coords = [[0.03, 6.11], [0.35, 4.73], [0.47, 4.33]];
+
+  for (var i = 0; i < space_centers.length; i++) {
+    space_centers[i].addEventListener('click', function (event) {
+      event.preventDefault();
+
+      if (this.innerHTML == 'Nasa') {
+        sphere.rotation.x = 0.03;
+        sphere.rotation.y = 6.11;
+      } else if (this.innerHTML == 'Esa') {
+        sphere.rotation.x = 0.35;
+        sphere.rotation.y = 4.73;
+      } else if (this.innerHTML == 'Rsa') {
+        sphere.rotation.x = 0.47;
+        sphere.rotation.y = 4.33;
+      }
+    });
+  }
 
   var webglEl = document.getElementById('webgl');
 
@@ -27,35 +47,21 @@
   var renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
 
-  scene.add(new THREE.AmbientLight(0x333333));
+  scene.add(new THREE.AmbientLight(0xffffff));
 
   var light = new THREE.DirectionalLight(0xffffff, 1);
   light.position.set(5, 3, 5);
   scene.add(light);
 
   //  Create earth sphere
-  var sphere = createSphere(radius, segments, 0.9, 0x222222);
+  var sphere = createSphere(radius, segments, 'assets/img/earth.jpg');
   sphere.rotation.y = rotation;
   scene.add(sphere);
-  sphere.frustumCulled = false;
 
-  //  Create on top of earth sphere
-  var sphere_bot = createSphere(radius - 0.01, segments, 0.15, 0x989898);
+  //  Create on wireframe onto sphere
+  var sphere_bot = createWireframe(radius + 0.01, segments, 0.05);
   sphere_bot.rotation.y = rotation;
-  sphere_bot.opacity = 0.1;
-  sphere_bot.color = 0xffffff;
-  scene.add(sphere_bot);
-
-  //  Create continents onto earth
-  var continents = createContinents(radius, segments);
-  continents.rotation.y = rotation;
-  scene.add(continents);
-  continents.frustumCulled = false;
-
-  //  Create clouds
-  var clouds = createClouds(radius, segments);
-  clouds.rotation.y = rotation;
-  //	scene.add(clouds);
+  // scene.add(sphere_bot);
 
   //  Create space centers markers
   var esa = createMarkers(0x192d67);
@@ -69,8 +75,6 @@
 
   var nasa = createMarkers(0xee293d);
   var nasa_coords = latLongToVector3(29.552793, -95.093072, radius);
-  //  nasa.rotation.y = 0;
-  //  nasa.rotation.x = 0;
   nasa.position.x = nasa_coords[0] + 0.12;
   nasa.position.y = nasa_coords[1] - 0.22;
   nasa.position.z = nasa_coords[2] + 0.065;
@@ -90,65 +94,41 @@
   scene.add(stars);
 
   var controls = new THREE.TrackballControls(camera);
-
   webglEl.appendChild(renderer.domElement);
-
   render();
 
-  function render() {
-    controls.update();
-    sphere.rotation.y += 0.0005;
-    continents.rotation.y += 0.0005;
+  // set starting earth rotation point
+  sphere.rotation.y = 0;
 
-    sphere_bot.rotation.y += 0.0007;
-    sphere_bot.rotation.x += 0.0009;
-
-    requestAnimationFrame(render);
-    renderer.render(scene, camera);
+  function createSphere(radius, segments, img) {
+    return new THREE.Mesh(new THREE.SphereGeometry(radius, segments, segments), new THREE.MeshPhongMaterial({
+      map: THREE.ImageUtils.loadTexture(img)
+    }));
   }
 
-  function createSphere(radius, segments, opacity, color) {
+  // Create a wireframe sphere
+  function createWireframe(radius, segments, opacity) {
     return new THREE.Mesh(new THREE.SphereGeometry(radius, segments, segments), new THREE.MeshPhongMaterial({
-      //			map: 
-      //      THREE.ImageUtils.loadTexture('assets/img/test.jpg'),
       transparent: true,
       opacity: opacity,
       wireframe: true,
-      color: color,
-      side: THREE.DoubleSide
-      //			bumpMap: THREE.ImageUtils.loadTexture('assets/img/elev_bump_4k.jpg'),
-      //			bumpScale: 0.005,
-      //			specularMap: THREE.ImageUtils.loadTexture('assets/img/water_4k.png'),
-      //			specular: new THREE.Color('grey')
+      color: 0xffffff
     }));
   }
 
-  function createClouds(radius, segments) {
-    return new THREE.Mesh(new THREE.SphereGeometry(radius + 0.003, segments, segments), new THREE.MeshPhongMaterial({
-      map: THREE.ImageUtils.loadTexture('assets/img/fair_clouds_4k.png'),
-      transparent: true
-    }));
-  }
-
-  function createContinents(radius, segments) {
-    return new THREE.Mesh(new THREE.SphereGeometry(radius + 0.003, segments, segments), new THREE.MeshPhongMaterial({
-      map: THREE.ImageUtils.loadTexture('assets/img/continents.png'),
-      transparent: true,
-      opacity: 0.9,
-      side: THREE.DoubleSide
-    }));
-  }
-
+  // Create marker
   function createMarkers(marker_color) {
-    return new THREE.Mesh(new THREE.CircleGeometry(0.02, 6), new THREE.MeshPhongMaterial({
+    return new THREE.Mesh(new THREE.CircleGeometry(0.02, 16), new THREE.MeshPhongMaterial({
       color: marker_color,
       side: THREE.DoubleSide
     }));
   }
 
+  // Create background
   function createStars(radius, segments) {
     return new THREE.Mesh(new THREE.SphereGeometry(radius, segments, segments), new THREE.MeshBasicMaterial({
-      map: THREE.ImageUtils.loadTexture('assets/img/galaxy_starfield.png'),
+      // map: THREE.ImageUtils.loadTexture('assets/img/background.jpg'), 
+      color: 0x000000,
       side: THREE.BackSide
     }));
   }
@@ -164,5 +144,19 @@
 
     return [x, y, z];
   }
+
+  // Rezising canvas
   var winResize = new THREEx.WindowResize(renderer, camera);
+
+  // Update canvas
+  function render() {
+    controls.update();
+
+    if (sphere.rotation.y > 6.28) sphere.rotation.y = 0;
+
+    sphere.rotation.y += 0.0005;
+
+    requestAnimationFrame(render);
+    renderer.render(scene, camera);
+  }
 })();
