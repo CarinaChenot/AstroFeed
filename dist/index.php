@@ -60,23 +60,32 @@
             <?php endforeach; ?>
         </div>
 
-
         <!-- Timeline wheel -->
         <div class="timeline">
             <div class="overflow">
-                <div class="mask">
-                  <div class="wheel">
-                      <div class="ligne">
-                        <div class="dots-origin">
-                          <div class="dot one"></div>
-                          <div class="dot two"></div>
-                          <div class="dot three"></div>
-                          <div class="stroke"></div>
-                          <div class="stroke"></div>
-                          <div class="stroke"></div>
-                        </div>
-                      </div>
-                  </div>
+                <div class="ligne"></div>
+                <div class="wheel">
+                    <div class="dots-origin">
+                        <?php foreach ($tweets as $_astro): ?>
+                            <?php foreach ($_astro as $_tweet): ?>
+                                     <div data-date="<?= strtotime($_tweet->created_at) ?>" class="dot <?= $_tweet->user->screen_name ?>"></div>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                        <div class="stroke"></div>
+                        <div class="stroke"></div>
+                        <div class="stroke"></div>
+                        <div class="stroke"></div>
+                        <div class="stroke"></div>
+                        <div class="stroke"></div>
+                        <div class="stroke"></div>
+                        <div class="stroke"></div>
+                        <div class="date"><?= date("l jS"); ?></div>
+                        <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"))); ?></div>
+                        <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-2, date("Y"))); ?></div>
+                        <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-3, date("Y"))); ?></div>
+                        <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-4, date("Y"))); ?></div>
+                        <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-4, date("Y"))); ?></div>
+                    </div>
                 </div>
             </div>
         </div>
