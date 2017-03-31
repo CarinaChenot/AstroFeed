@@ -1,24 +1,34 @@
 'use strict';
 
 (function () {
+
+  //  function iss_get_coords() { 
+  //    var iss_coords_lat = document.querySelectorAll('.space-centers span.iss_lat').innerHTML;
+  //    var iss_coords_long = document.querySelectorAll('.space-centers span.iss_long').innerHTML;
+  //    return [iss_coords_lat, iss_coords_long];
+  //  }
+  //console.log(iss_get_coords());
+  //
+  //var test_iss = iss_get_coords();
+
   // Adapt earth rotation to display at the center the space center selected
   var space_centers = document.querySelectorAll('.space-centers a');
   // 0 - nasa ; 1 - esa ; 2 - rsa
-  var markers_coords = [[0.03, 6.11], [0.35, 4.73], [0.47, 4.33]];
+  var markers_coords = [[0.03, 6.23], [0.35, 4.73], [0.47, 4.33]];
 
   for (var i = 0; i < space_centers.length; i++) {
     space_centers[i].addEventListener('click', function (event) {
       event.preventDefault();
 
       if (this.innerHTML == 'Nasa') {
-        sphere.rotation.x = 0.03;
-        sphere.rotation.y = 6.11;
+        sphere.rotation.x = markers_coords[0][0];
+        sphere.rotation.y = markers_coords[0][1];
       } else if (this.innerHTML == 'Esa') {
-        sphere.rotation.x = 0.35;
-        sphere.rotation.y = 4.73;
+        sphere.rotation.x = markers_coords[1][0];
+        sphere.rotation.y = markers_coords[1][1];
       } else if (this.innerHTML == 'Rsa') {
-        sphere.rotation.x = 0.47;
-        sphere.rotation.y = 4.33;
+        sphere.rotation.x = markers_coords[2][0];
+        sphere.rotation.y = markers_coords[2][1];
       }
     });
   }
@@ -47,7 +57,7 @@
   var renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
 
-  scene.add(new THREE.AmbientLight(0xffffff));
+  scene.add(new THREE.AmbientLight(0xd3b676));
 
   var light = new THREE.DirectionalLight(0xffffff, 0.8);
   light.position.set(3, 5, 4);
@@ -78,7 +88,7 @@
   nasa.position.x = nasa_coords[0] + 0.03;
   nasa.position.y = nasa_coords[1] - 0.22;
   nasa.position.z = nasa_coords[2] + 0.067;
-  //  sphere.add(nasa); 
+  sphere.add(nasa);
 
   var rsa = createMarkers(0xd8e3ef);
   var rsa_coords = latLongToVector3(55.87985, 38.105581, radius);
@@ -97,7 +107,7 @@
   var iss = createIss();
   //  iss.position.x = 2;
   iss.scale.set(0.008, 0.008, 1);
-  iss.position.x = 0.7;
+  iss.position.x = 0.75;
   scene.add(iss);
 
   //  sphere = new THREE.Object3D();
@@ -139,8 +149,8 @@
 
   // Create marker
   function createMarkers(marker_color) {
-    return new THREE.Mesh(new THREE.CircleGeometry(0.02, 16), new THREE.MeshPhongMaterial({
-      color: marker_color,
+    return new THREE.Mesh(new THREE.CircleGeometry(0.01, 16), new THREE.MeshBasicMaterial({
+      color: 0xceb789,
       side: THREE.DoubleSide
     }));
   }
@@ -156,8 +166,8 @@
 
   // Create Iss
   function createIss() {
-    return new THREE.Mesh(new THREE.RingGeometry(0.5, 5, 8), new THREE.MeshBasicMaterial({
-      color: 0xffff00,
+    return new THREE.Mesh(new THREE.RingGeometry(2, 4, 8), new THREE.MeshBasicMaterial({
+      color: 0xd3b676,
       side: THREE.DoubleSide
     }));
   }
@@ -184,7 +194,7 @@
     if (sphere.rotation.y > 6.28) sphere.rotation.y = 0;
 
     // Auto rotation - slow
-    //		  sphere.rotation.y += 0.0005;
+    sphere.rotation.y += 0.0005;
     //      parent.rotation.y += 0.0005;
 
     // 
