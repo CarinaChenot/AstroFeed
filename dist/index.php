@@ -70,8 +70,10 @@
         </div>
 
         <!-- Embed ISS live -->
+<!--
         <div class="live">
-        <iframe width="280" height="70" src="http://www.ustream.tv/embed/17074538?html5ui" scrolling="no" allowfullscreen webkitallowfullscreen frameborder="0" style="border: 0 none transparent;"></iframe></div>
+        <iframe width="4280" height="270" src="http://www.ustream.tv/embed/17074538?html5ui" scrolling="no" allowfullscreen webkitallowfullscreen frameborder="0" style="border: 0 none transparent;"></iframe></div>
+-->
 
         <!-- Timeline wheel -->
         <div class="timeline">
