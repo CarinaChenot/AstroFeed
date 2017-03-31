@@ -2,3 +2,7 @@ body {
     font-family: $secondary-font;
     color: white;
 }
+
+::-webkit-scrollbar { 
+    display: none; 
+}

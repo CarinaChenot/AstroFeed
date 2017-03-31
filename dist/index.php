@@ -14,7 +14,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <title>Title</title>
+    <title>Astrofeed</title>
+    <link rel="icon" type="image/png" href="assets/img/astrofeed_favicon.png" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i" rel="stylesheet">
     <link href="assets/css/app.min.css" rel="stylesheet">
@@ -29,7 +30,7 @@
             <div>An interactive astronauts socials feed</div>
         </div>
     </section>
-
+    
     <!-- HOME -->
     <div id="webgl"></div>
     <section id="home">
@@ -47,17 +48,22 @@
 
         <!-- Tweets display -->
         <div class="tweets-container">
-            <?php foreach ($tweets as $_astro): ?>
-            <div class="tweets-display <?= $_astro[0]->user->screen_name ?>">
-                <h2 class="name"><?= $_astro[0]->user->name ?></h2>
-                <?php foreach ($_astro as $_tweet): ?>
-                     <div class="tweet <?= $_tweet->user->screen_name ?>">
-                         <span class="date"><?= date('d F - H:i', strtotime($_tweet->created_at)) ?></span>
-                         <p class="text"><?php echo json_tweet_text_to_HTML($_tweet); ?></p>
-                     </div>
+            <h1>Twitter feed</h1>
+            <div class="feed-container">
+                <?php foreach ($tweets as $_astro): ?>
+                    <div class="tweets-display <?= $_astro[0]->user->screen_name ?>">
+                        <h2 class="name">- <?= $_astro[0]->user->name ?> -</h2>
+                        <a class="user-link" href="https://twitter.com/<?= $_astro[0]->user->screen_name ?>" target="_blank">@<?= $_astro[0]->user->screen_name ?></a>
+                
+                        <?php foreach ($_astro as $_tweet): ?>
+                            <div class="tweet <?= $_tweet->user->screen_name ?>">
+                                <span class="date"><?= date('d F - H:i', strtotime($_tweet->created_at)) ?></span>
+                                <p class="text"><?php echo json_tweet_text_to_HTML($_tweet); ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
 
         <!-- Timeline wheel -->

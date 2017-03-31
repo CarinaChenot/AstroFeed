@@ -1,16 +1,48 @@
 .tweets-container {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 30px;
+    top: 20px;
     width: 30vw;
-    height: 40vh;
+    height: 50vh;
+    font-size: 14px;
+}
+
+.feed-container
+{
     overflow-y: scroll;
     overflow-x: hidden;
+    position: absolute;
+    right: 30px;
+    top: 50px;
+    width: 30vw;
+    height: 50vh;
     font-size: 14px;
+}
+
+.tweets-container h1 {
+    font-family: $primary-font;
+    float: right;
+    font-size: 24px;
+    color: #e8e8e8;
+    font-weight: bold;
+}
+
+.tweets-container h1:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 26px;
+    left: 50px;
+    right: 12px;
+    height: 3px;
+    border-radius: 10px;
+    background: #d6a53a;
 }
 
 .tweets-display {
     position: absolute;
+    top: 0px;
+    left: 50px;
     font-size: 14px;
     line-height: 15px;
 
@@ -22,13 +54,26 @@
         .name {
             opacity: 1;
         }
+        
+        .user-link {
+            opacity: 1;
+        }
     }
 
     .name {
-        font-weight: bold;
-        font-size: 22px;
+        font-family: $primary-font;
+        font-weight: normal;
+        font-size: 16px;
+        color: #e8e8e8;
         opacity: 0;
         transition: opacity 0.3s ease-in-out;
+    }
+    
+    .user-link {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        text-decoration: none;
+        color: #888888;
     }
 
     .tweet {
@@ -36,7 +81,21 @@
         margin-top: 10px;
         right: -30vw;
         transition: transform 0.3s ease-in-out;
+        margin-bottom: 17px;
     }
+    
+    .tweet:after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        border-radius: 2px;
+        background: rgba(214, 165, 58, 0.27);
+    }
+    
     $test: 0s;
     @for $i from 1 through 20 {
         .tweet:nth-of-type(#{$i}) {
@@ -46,23 +105,27 @@
     }
 
     .date {
-        font-size: 10px;
+        font-size: 14px;
+        color: #d6a53a;
     }
 
     .text {
-      a {
-        font-weight: bold;
-      }
+        color: #d5d5d5;
+        font-size: 16px;
+        
+        a {
+            font-weight: bold;
+        }
     }
 
-    &::after {
-        content: '';
-        position: fixed;
-        top: 27vh;
-        right: 0;
-        width: 30vw;
-        height: 16vh;
-        margin: 0;
-        background-image: linear-gradient(to bottom, transparent, black);
-    }
+//    &::after {
+//        content: '';
+//        position: fixed;
+//        top: 27vh;
+//        right: 0;
+//        width: 30vw;
+//        height: 16vh;
+//        margin: 0;
+//        background-image: linear-gradient(to bottom, transparent, black);
+//    }
 }

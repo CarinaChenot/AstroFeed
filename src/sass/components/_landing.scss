@@ -4,31 +4,34 @@
     position: absolute;
     background-image: url('../img/stars.png');
     animation-name: fading;
-    animation-duration: 5s;
+    animation-duration: 6s;
     opacity: 1;
     animation-fill-mode: forwards;
     animation-delay: 4s;
     z-index: 1000;
+    will-change: transform;
 }
 
 .landing-text {
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
     text-align: center;
     color: transparent;
-    font-size: 100px;
     animation-name: animatetext;
     animation-duration: 10s;
     animation-fill-mode: forwards;
+    will-change: transform;
     font-family: $primary-font;
+    font-size: 80px;
 }
 
 .landing-text div {
     margin-top: 15px;
     font-family: $secondary-font;
-    font-size: 20px;
+    font-size: 32px;
+    color: #d3b676;
 }
 @keyframes fading {
     0% {
