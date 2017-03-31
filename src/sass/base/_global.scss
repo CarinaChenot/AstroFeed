@@ -3,6 +3,25 @@ body {
     color: white;
 }
 
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+@media only screen and  (max-width: 1000px) {
+  #home {
+      display: none;
+  }
+
+  body::before {
+      content: 'For a better experience please use your desktop';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: $primary-font;
+      font-size: 20px;
+      text-align: center;
+  }
+
 }

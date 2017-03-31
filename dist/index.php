@@ -30,7 +30,7 @@
             <div>An interactive astronauts socials feed</div>
         </div>
     </section>
-    
+
     <!-- HOME -->
     <div id="webgl"></div>
     <section id="home">
@@ -56,7 +56,7 @@
                         <a class="user-link" href="https://twitter.com/<?= $_astro[0]->user->screen_name ?>" target="_blank">@<?= $_astro[0]->user->screen_name ?></a>
 
                         <?php foreach ($_astro as $_tweet): ?>
-                            <div class="tweet <?= $_tweet->user->screen_name ?>">
+                            <div class="tweet <?= $_tweet->user->screen_name ?>" id="id<?= $_tweet->id ?>">
                                 <span class="date"><?= date('d F - H:i', strtotime($_tweet->created_at)) ?></span>
                                 <p class="text"><?php echo json_tweet_text_to_HTML($_tweet); ?></p>
                             </div>
@@ -65,7 +65,7 @@
                 <?php endforeach; ?>
             </div>
         </div>
-        
+
         <!-- Embed ISS live -->
 <!--        <iframe width="380" height="170" src="http://www.ustream.tv/embed/17074538?html5ui" scrolling="no" allowfullscreen webkitallowfullscreen frameborder="0" style="border: 0 none transparent;"></iframe>-->
 
@@ -76,8 +76,25 @@
                 <div class="wheel">
                     <div class="dots-origin">
                         <?php foreach ($tweets as $_astro): ?>
-                            <?php foreach ($_astro as $_tweet): ?>
-                                     <div data-date="<?= strtotime($_tweet->created_at) ?>" class="dot <?= $_tweet->user->screen_name ?>"></div>
+                            <?php foreach ($_astro as $_tweet):
+                                if (strtotime($_tweet->created_at) > mktime(0, 0, 0, date("m")  , date("d"), date("Y"))) {
+                                    $day = 0;
+                                } elseif (strtotime($_tweet->created_at) > mktime(0, 0, 0, date("m")-1  , date("d"), date("Y"))) {
+                                    $day = 1;
+                                } elseif (strtotime($_tweet->created_at) > mktime(0, 0, 0, date("m")-2  , date("d"), date("Y"))) {
+                                        $day = 2;
+                                } elseif (strtotime($_tweet->created_at) > mktime(0, 0, 0, date("m")-3  , date("d"), date("Y"))) {
+                                        $day = 3;
+                                } elseif (strtotime($_tweet->created_at) > mktime(0, 0, 0, date("m")-4  , date("d"), date("Y"))) {
+                                        $day = 4;
+                                } elseif (strtotime($_tweet->created_at) > mktime(0, 0, 0, date("m")-5  , date("d"), date("Y"))) {
+                                        $day = 5;
+                                } else {
+                                    continue;
+                                }
+
+                                ?>
+                                     <div data-day="<?= $day ?>" data-date="<?= strtotime($_tweet->created_at) ?>" class="dot <?= $_tweet->user->screen_name ?>" onclick="showTweet('<?= $_tweet->id ?>');"></div>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                         <div class="stroke"></div>

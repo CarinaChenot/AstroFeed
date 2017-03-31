@@ -54,7 +54,7 @@
         .name {
             opacity: 1;
         }
-        
+
         .user-link {
             opacity: 1;
         }
@@ -71,7 +71,7 @@
         transition: opacity 0.3s ease-in-out;
         margin-top: -40px;
     }
-    
+
     .user-link {
         opacity: 0;
         transition: opacity 0.3s ease-in-out;
@@ -88,7 +88,7 @@
         transition: transform 0.3s ease-in-out;
         margin-bottom: 17px;
     }
-    
+
     .tweet:after {
         content: '';
         display: block;
@@ -100,31 +100,36 @@
         border-radius: 2px;
         background: rgba(214, 165, 58, 0.27);
     }
-    
+
     $test: 0s;
-    @for $i from 1 through 20 {
-        .tweet:nth-of-type(#{$i}) {
-            transition-delay: $test;
-            $test: $test+0.1;
+    .tweets-display.active {
+        @for $i from 1 through 20 {
+            .tweet:nth-of-type(#{$i}) {
+                transition-delay: $test;
+                $test: $test+0.1;
+            }
         }
     }
+
 
     .date {
         font-size: 14px;
         color: #d6a53a;
+        line-height: 18px;
     }
 
     .text {
         color: #d5d5d5;
         font-size: 16px;
-        
+        line-height: 17px;
+
         a {
             font-weight: bold;
         }
     }
 
     &::after {
-        content: '';
+        // content: '';
         position: fixed;
         top: 53vh;
         right: 50px;
@@ -133,4 +138,14 @@
         margin: 0;
         background-image: linear-gradient(to bottom, transparent, rgba(13, 13, 13, 0.37));
     }
+}
+
+
+
+.tweet.selected {
+    // transform: translateX(-30vw);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: transform 0.2s ease-in-out;
 }
