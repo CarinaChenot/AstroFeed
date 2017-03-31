@@ -2,22 +2,32 @@
 
 // Landing
 
-var myVar = void 0;
+var show = void 0,
+    hide = void 0;
 
 function timer() {
-    myVar = setTimeout(hidePage, 2500);
+    hide = setTimeout(hidePage, 2500);
+    // show = setTimeout(showPage, 1000)
 }
 
 function hidePage() {
-    document.getElementById('landing').style.display = 'none';
+    document.querySelector('#landing').style.display = 'none';
 }
+
+// function showPage() {
+//     document.querySelector('#home').style.display = 'block'
+// }
 
 // Tweets animation
 function displayTweets(astro) {
     var container = document.querySelectorAll('.tweets-display');
+    var tweets = document.querySelectorAll('.tweet');
 
     for (var i = 0; i < container.length; i++) {
         container[i].classList.remove('active');
+    }
+    for (var _i = 0; _i < tweets.length; _i++) {
+        tweets[_i].classList.remove('selected');
     }
 
     var selected = document.querySelector('.tweets-display.' + astro);
@@ -44,8 +54,6 @@ timeline.addEventListener('scroll', function (e) {
         //     timeline.scrollTop = 200
         // }
 
-        // console.log('last scroll pos', scroll_pos);
-        console.log('actual one', timeline.scrollTop);
         if (scroll_pos > timeline.scrollTop) {
             rotation += 45;
         } else {
@@ -65,17 +73,51 @@ timeline.addEventListener('scroll', function (e) {
 
 var dots = document.querySelectorAll('.dot');
 var strokes = document.querySelectorAll('.stroke');
-var date = document.querySelectorAll('.date');
+var date = document.querySelectorAll('.timeline .date');
+var dateContainer = document.querySelector('.date-container');
 var ligne = document.querySelector('.ligne').offsetWidth;
 var datePos = 0;
+var dateY = -16;
+
+dateContainer.style.width = ligne + 'px';
+
+var section = 0;
 
 for (var i = 0; i < dots.length; i++) {
-    dots[i].style.transform = 'rotate(' + (i + 3) * 10 + 'deg) translateX(' + ligne / 2 + 'px)';
+    if (dots[i].getAttribute('data-day') == 1) section = 45;
+    if (dots[i].getAttribute('data-day') == 2) section = 90;
+    if (dots[i].getAttribute('data-day') == 3) section = 135;
+    if (dots[i].getAttribute('data-day') == 4) section = 180;
+    if (dots[i].getAttribute('data-day') == 5) section = 225;
+    dots[i].style.transform = 'rotate(' + (i + section) * 10 + 'deg) translateY(' + ligne / 2 + 'px)';
 }
-for (var _i = 0; _i < strokes.length; _i++) {
-    strokes[_i].style.transform = 'rotate(' + _i * 45 + 'deg) translateX(' + ligne / 2 + 'px)';
+for (var _i2 = 0; _i2 < strokes.length; _i2++) {
+    strokes[_i2].style.transform = 'rotate(' + _i2 * 45 + 'deg) translateX(' + ligne / 2 + 'px)';
 }
-for (var _i2 = 0; _i2 < date.length; _i2++) {
-    date[_i2].style.transform = 'rotate(' + datePos + 'deg) translateY(' + ligne / 2 + 'px) translateX(-50%)';
-    datePos -= 45;
+for (var _i3 = 0; _i3 < date.length; _i3++) {
+    date[_i3].style.transform = 'translateY(' + parseInt(dateY + ligne / 2) + 'px) rotate(' + datePos + 'deg) translateY(' + parseInt(ligne / 2 + 40) + 'px)';
+    datePos += 45;
+    dateY -= 16;
 }
+
+function showTweet(id) {
+    var tweets = document.querySelectorAll('.tweet');
+    var tweet = document.querySelector('#id' + id);
+    var container = document.querySelectorAll('.tweets-display');
+
+    for (var _i4 = 0; _i4 < container.length; _i4++) {
+        container[_i4].classList.remove('active');
+    }
+    for (var _i5 = 0; _i5 < tweets.length; _i5++) {
+        tweets[_i5].classList.remove('selected');
+    }
+    tweet.classList.add('selected');
+}
+
+// Get click or scroll
+document.querySelector('.overflow').addEventListener('click', function () {
+    wheel.style.zIndex = '1';
+});
+window.addEventListener('scroll', function () {
+    wheel.style.zIndex = '-1';
+});

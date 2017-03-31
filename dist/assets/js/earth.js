@@ -2,14 +2,14 @@
 
 (function () {
 
-  //  function iss_get_coords() { 
-  //    var iss_coords_lat = document.querySelectorAll('.space-centers span.iss_lat').innerHTML;
-  //    var iss_coords_long = document.querySelectorAll('.space-centers span.iss_long').innerHTML;
-  //    return [iss_coords_lat, iss_coords_long];
-  //  }
-  //console.log(iss_get_coords());
-  //
-  //var test_iss = iss_get_coords();
+  function iss_get_coords() {
+    var iss_coords_lat = document.querySelectorAll('.space-centers span.iss_lat').innerHTML;
+    var iss_coords_long = document.querySelectorAll('.space-centers span.iss_long').innerHTML;
+    return [iss_coords_lat, iss_coords_long];
+  }
+  console.log(iss_get_coords());
+
+  var test_iss = iss_get_coords();
 
   // Adapt earth rotation to display at the center the space center selected
   var space_centers = document.querySelectorAll('.space-centers a');

@@ -5,6 +5,7 @@
 
     include 'includes/cache.php';
     include 'includes/tweet_html.php';
+    include 'includes/iss_location.php';
 
  ?>
 
@@ -24,12 +25,14 @@
 <body onload="timer()">
 
     <!-- LANDING -->
+<!--
     <section id="landing">
         <div class="landing-text">
             AstroFeed
             <div>An interactive astronauts socials feed</div>
         </div>
     </section>
+-->
 
     <!-- HOME -->
     <div id="webgl"></div>
@@ -56,7 +59,7 @@
                         <a class="user-link" href="https://twitter.com/<?= $_astro[0]->user->screen_name ?>" target="_blank">@<?= $_astro[0]->user->screen_name ?></a>
 
                         <?php foreach ($_astro as $_tweet): ?>
-                            <div class="tweet <?= $_tweet->user->screen_name ?>" id="id<?= $_tweet->id ?>">
+                            <div class="tweet <?= $_tweet->user->screen_name ?>" id="id<?= $_tweet->id_str ?>">
                                 <span class="date"><?= date('d F - H:i', strtotime($_tweet->created_at)) ?></span>
                                 <p class="text"><?php echo json_tweet_text_to_HTML($_tweet); ?></p>
                             </div>
@@ -67,7 +70,8 @@
         </div>
 
         <!-- Embed ISS live -->
-<!--        <iframe width="380" height="170" src="http://www.ustream.tv/embed/17074538?html5ui" scrolling="no" allowfullscreen webkitallowfullscreen frameborder="0" style="border: 0 none transparent;"></iframe>-->
+        <div class="live">
+        <iframe width="280" height="70" src="http://www.ustream.tv/embed/17074538?html5ui" scrolling="no" allowfullscreen webkitallowfullscreen frameborder="0" style="border: 0 none transparent;"></iframe></div>
 
         <!-- Timeline wheel -->
         <div class="timeline">
@@ -94,7 +98,7 @@
                                 }
 
                                 ?>
-                                     <div data-day="<?= $day ?>" data-date="<?= strtotime($_tweet->created_at) ?>" class="dot <?= $_tweet->user->screen_name ?>" onclick="showTweet('<?= $_tweet->id ?>');"></div>
+                                     <div data-day="<?= $day ?>" data-date="<?= strtotime($_tweet->created_at) ?>" class="dot <?= $_tweet->user->screen_name ?>" onclick="showTweet('<?= $_tweet->id_str ?>');"></div>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                         <div class="stroke"></div>
@@ -119,9 +123,15 @@
         </div>
 
         <div class="space-centers">
-              <a href="#">Nasa</a>
-              <a href="#">Esa</a>
-              <a href="#">Rsa</a>
+            <h2>Space centers</h2>
+            <a href="#">Nasa</a> -
+            <a href="#">Esa</a> -
+            <a href="#">Rsa</a>
+              
+            <h2>ISS coordinates</h2>
+            <span class="iss iss_lat">Latitude / <?php echo $iss_pos->iss_position->latitude ?></span>
+            <span class="iss iss_long">Longitude / <?php echo $iss_pos->iss_position->longitude; ?></span>
+            <button onClick="window.location.reload()">- Click to get new Iss position</button>
         </div>
 
     </section>

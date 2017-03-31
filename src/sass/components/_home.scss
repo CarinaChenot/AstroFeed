@@ -15,3 +15,44 @@ body {
     position: absolute;
     z-index: -1;
 }
+
+.space-centers {
+    margin-top: 20px;
+    color: #d5d5d5;
+}
+
+.space-centers h2 {
+    font-family: $primary-font;
+    font-size: 16px;
+    color: #d6a53a;
+    margin-top: 10px;
+}
+
+.space-centers a {
+    font-size: 16px;
+    text-decoration: none;
+}
+.space-centers a:hover {
+    color: #f8f8f8;
+}
+
+.space-centers .iss {
+    display: block;
+}
+
+.space-centers button {
+    padding: 4px 2px;
+    border-radius: 5px;
+    color: #d6a53a;
+    cursor: pointer;
+}
+
+.space-centers button:hover {
+    color: #f4c869;
+}
+
+.live {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
