@@ -70,7 +70,7 @@
         }
     }
 
-    .dates-container {
+    .date-container {
         width: 200px;
         white-space: nowrap;
     }
@@ -84,10 +84,10 @@
     }
 
     .date {
-        position: absolute;
         text-align: center;
-        margin-left: 5px;
-        transform: translateX(-50%);
+        /* top: 0; */
+        /* margin-left: 5px; */
+        /* transform: translateX(-50%); */
         white-space: nowrap;
         will-change: transform;
     }

@@ -88,12 +88,14 @@
                         <div class="stroke"></div>
                         <div class="stroke"></div>
                         <div class="stroke"></div>
+                    </div>
+                    <div class="date-container">
                         <div class="date"><?= date("l jS"); ?></div>
                         <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"))); ?></div>
                         <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-2, date("Y"))); ?></div>
                         <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-3, date("Y"))); ?></div>
                         <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-4, date("Y"))); ?></div>
-                        <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-4, date("Y"))); ?></div>
+                        <div class="date"><?= date("l jS", mktime(0, 0, 0, date("m")  , date("d")-5, date("Y"))); ?></div>
                     </div>
                 </div>
             </div>

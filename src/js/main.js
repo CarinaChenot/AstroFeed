@@ -1,13 +1,18 @@
 // Landing
 
-let myVar
+let show, hide
 
 function timer() {
-    myVar = setTimeout(hidePage, 2500)
+    hide = setTimeout(hidePage, 2500)
+    show = setTimeout(showPage, 1000)
 }
 
 function hidePage() {
-    document.getElementById('landing').style.display = 'none'
+    document.querySelector('#landing').style.display = 'none'
+}
+
+function showPage() {
+    document.querySelector('#home').style.display = 'block'
 }
 
 // Tweets animation
@@ -43,8 +48,6 @@ timeline.addEventListener('scroll', (e) => {
         //     timeline.scrollTop = 200
         // }
 
-        // console.log('last scroll pos', scroll_pos);
-        console.log('actual one', timeline.scrollTop);
         if (scroll_pos > timeline.scrollTop) {
             rotation += 45
         } else {
@@ -65,18 +68,22 @@ timeline.addEventListener('scroll', (e) => {
 
 let dots = document.querySelectorAll('.dot')
 let strokes = document.querySelectorAll('.stroke')
-let date = document.querySelectorAll('.date')
+let date = document.querySelectorAll('.timeline .date')
+let dateContainer = document.querySelector('.date-container')
 let ligne = document.querySelector('.ligne').offsetWidth
-let datePos = 0;
+let datePos = 0
+let dateY = -16;
 
+dateContainer.style.width = ligne + 'px';
 
 for (let i = 0; i < dots.length; i++) {
-    dots[i].style.transform = 'rotate(' + (i+3) * 10 + 'deg) translateX(' + ligne / 2 + 'px)'
+    dots[i].style.transform = 'rotate(' + (i + 3) * 10 + 'deg) translateX(' + ligne / 2 + 'px)'
 }
 for (let i = 0; i < strokes.length; i++) {
     strokes[i].style.transform = 'rotate(' + i * 45 + 'deg) translateX(' + ligne / 2 + 'px)'
 }
 for (let i = 0; i < date.length; i++) {
-    date[i].style.transform = 'rotate(' + datePos + 'deg) translateY(' + ligne / 2 + 'px) translateX(-50%)'
-    datePos -= 45;
+    date[i].style.transform = 'translateY(' + parseInt(dateY + (ligne / 2)) + 'px) rotate(' + datePos + 'deg) translateY(' + parseInt((ligne / 2) + 40) + 'px)'
+    datePos += 45
+    dateY -= 16
 }
