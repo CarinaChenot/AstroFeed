@@ -1,12 +1,24 @@
 # ASTROFEED
+
 Get all the social feed from your favourite astronauts in one place !
 
-### Todo
+### Features
 
-- [ ] Generate timeline from data
-- [ ] On click timeline dot display tweet
-- [x] UI timeline fix position des dates
-- [ ] Fix scroll qui dépasse
+* Retrieve twitter feed of each astronaut
+* Display their position on the earth
+* Cache data
+* Drag and drop earth
+* Display a selected tweet on the timeline
+
+### Dev specs
+
+* Twitter API
+* Open notify API
+* ES6
+* SASS
+* WebGL with three.js
+* Git
+* Gulp
 
 ### Installation
 
