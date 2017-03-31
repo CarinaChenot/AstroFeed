@@ -1,6 +1,6 @@
 .tweets-container {
     position: absolute;
-    right: 30px;
+    right: 24px;
     top: 20px;
     width: 30vw;
     height: 50vh;
@@ -12,8 +12,8 @@
     overflow-y: scroll;
     overflow-x: hidden;
     position: absolute;
-    right: 30px;
-    top: 50px;
+    right: 24px;
+    top: 90px;
     width: 30vw;
     height: 50vh;
     font-size: 14px;
@@ -66,14 +66,19 @@
         font-size: 16px;
         color: #e8e8e8;
         opacity: 0;
+        cursor: default;
+        position: fixed;
         transition: opacity 0.3s ease-in-out;
+        margin-top: -40px;
     }
     
     .user-link {
         opacity: 0;
         transition: opacity 0.3s ease-in-out;
         text-decoration: none;
+        position: fixed;
         color: #888888;
+        margin-top: -25px;
     }
 
     .tweet {
@@ -118,14 +123,14 @@
         }
     }
 
-//    &::after {
-//        content: '';
-//        position: fixed;
-//        top: 27vh;
-//        right: 0;
-//        width: 30vw;
-//        height: 16vh;
-//        margin: 0;
-//        background-image: linear-gradient(to bottom, transparent, black);
-//    }
+    &::after {
+        content: '';
+        position: fixed;
+        top: 53vh;
+        right: 50px;
+        width: 27vw;
+        height: 16vh;
+        margin: 0;
+        background-image: linear-gradient(to bottom, transparent, rgba(13, 13, 13, 0.37));
+    }
 }

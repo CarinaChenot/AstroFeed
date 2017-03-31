@@ -54,7 +54,7 @@
                     <div class="tweets-display <?= $_astro[0]->user->screen_name ?>">
                         <h2 class="name">- <?= $_astro[0]->user->name ?> -</h2>
                         <a class="user-link" href="https://twitter.com/<?= $_astro[0]->user->screen_name ?>" target="_blank">@<?= $_astro[0]->user->screen_name ?></a>
-                
+
                         <?php foreach ($_astro as $_tweet): ?>
                             <div class="tweet <?= $_tweet->user->screen_name ?>">
                                 <span class="date"><?= date('d F - H:i', strtotime($_tweet->created_at)) ?></span>
